@@ -23,7 +23,7 @@ export class HousesController extends BaseController {
 async getAll(req, res, next){
   try {
     const houses = await housesServices.getAll(req.query)
-    resizeBy.send(houses)
+    res.send(houses)
   } catch (error) {
     next(error)
   }
@@ -32,7 +32,7 @@ async getAll(req, res, next){
 async getById(req, res, next){
   try {
     const house = await housesServices.getById(req.params.id)
-    resizeBy.send(house)
+    res.send(house)
   } catch (error) {
     next(error)
   }
@@ -41,7 +41,19 @@ async getById(req, res, next){
 async create(req, res, next){
   try {
     const house = await housesServices.create(req.body)
-    resizeBy.send(house)
+    res.send(house)
+  } catch (error) {
+    next(error)
+  }
+}
+
+async edit(req, res, next){
+
+}
+
+async destroy(req, res, next){
+  try {
+    await housesServices.destroy(req.params.id) res.send({ message: 'Successfully Deleted House' })
   } catch (error) {
     next(error)
   }
